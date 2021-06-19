@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.R
 
-class PokeListAdapter(private val pokemonList: ArrayList<String>): RecyclerView.Adapter<PokeListAdapter.ViewHolder>() {
+class PokeListAdapter(private val pokemonList: ArrayList<String>, val onItemClick: (String) -> Unit): RecyclerView.Adapter<PokeListAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView = itemView.findViewById<TextView>(R.id.textView)
 
@@ -21,6 +21,9 @@ class PokeListAdapter(private val pokemonList: ArrayList<String>): RecyclerView.
 
     override fun onBindViewHolder(holder: PokeListAdapter.ViewHolder, position: Int) {
         holder.textView.text = pokemonList[position]
+        holder.itemView.setOnClickListener {
+            onItemClick(pokemonList[position])
+        }
     }
 
     override fun getItemCount(): Int = pokemonList.size

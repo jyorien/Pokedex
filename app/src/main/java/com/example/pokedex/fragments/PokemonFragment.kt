@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.pokedex.PokeResponse
 import com.example.pokedex.Pokemon
 import com.example.pokedex.R
@@ -47,7 +51,10 @@ class PokemonFragment : Fragment() {
                     pokeList.add(pokemon.name)
                 }
                 withContext(Dispatchers.Main) {
-                    binding.pokeList.adapter = PokeListAdapter(pokeList)
+                    binding.pokeList.adapter = PokeListAdapter(pokeList) { pokemonName ->
+                        val pokemon = response.results.first { it.name == pokemonName }
+                        navigateToPokemonScreen(pokemon.url, pokemonName)
+                    }
 
                 }
 
@@ -56,6 +63,15 @@ class PokemonFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun navigateToPokemonScreen(url: String, pokeName: String) {
+        val splitUrl = url.split("/")
+        val pokemonIndex = splitUrl[splitUrl.size-2]
+        val action = PokemonFragmentDirections.actionPokemonFragmentToPokemonDataFragment()
+        action.index = pokemonIndex
+        action.pokeName = pokeName
+        this.findNavController().navigate(action)
     }
 
 }

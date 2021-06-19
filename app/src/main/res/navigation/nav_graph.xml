@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pokemonFragment">
+
+    <fragment
+        android:id="@+id/pokemonFragment"
+        android:name="com.example.pokedex.fragments.PokemonFragment"
+        android:label="PokemonFragment"
+        tools:layout="@layout/fragment_pokemon">
+        <action
+            android:id="@+id/action_pokemonFragment_to_pokemonDataFragment"
+            app:destination="@id/pokemonDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonDataFragment"
+        android:name="com.example.pokedex.fragments.PokemonDataFragment"
+        android:label="fragment_pokemon_data"
+        tools:layout="@layout/fragment_pokemon_data" >
+        <argument
+            android:name="index"
+            app:argType="string"
+            android:defaultValue="1" />
+        <argument
+            android:name="pokeName"
+            app:argType="string"
+            android:defaultValue="Bulbasaur" />
+    </fragment>
+</navigation>
