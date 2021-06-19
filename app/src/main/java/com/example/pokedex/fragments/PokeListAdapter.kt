@@ -20,7 +20,7 @@ class PokeListAdapter(private val pokemonList: ArrayList<String>, val onItemClic
     }
 
     override fun onBindViewHolder(holder: PokeListAdapter.ViewHolder, position: Int) {
-        holder.textView.text = pokemonList[position]
+        holder.textView.text = pokemonList[position].replaceFirstChar { it.uppercase() }
         holder.itemView.setOnClickListener {
             onItemClick(pokemonList[position])
         }

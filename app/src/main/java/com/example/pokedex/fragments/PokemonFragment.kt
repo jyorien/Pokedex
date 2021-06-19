@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.pokedex.MainActivity
 import com.example.pokedex.PokeResponse
 import com.example.pokedex.Pokemon
 import com.example.pokedex.R
@@ -35,6 +36,7 @@ class PokemonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as MainActivity).hideUpButton()
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pokemon, container, false)
         loadPokemon()
